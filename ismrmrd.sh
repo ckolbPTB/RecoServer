@@ -15,7 +15,7 @@ cd ismrmrd
 mkdir build
 cd build
 cmake ..
-make
+make -j 20
 make install
 
 git clone https://github.com/ismrmrd/siemens_to_ismrmrd.git --depth 1
@@ -23,7 +23,7 @@ cd siemens_to_ismrmrd
 mkdir build
 cd build
 cmake ..
-make
+make -j 20
 make install
 
 apt-get clean

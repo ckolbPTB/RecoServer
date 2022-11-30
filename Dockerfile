@@ -23,6 +23,12 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
      /bin/bash ~/miniconda.sh -b -p /opt/conda
 ENV PATH=$CONDA_DIR/bin:$PATH
 
+# install pycharm
+ENV PYCHARM_DIR /opt
+RUN wget --quiet https://download.jetbrains.com/python/pycharm-community-2022.2.4.tar.gz
+RUN tar xzf pycharm-*.tar.gz -C /opt
+ENV PATH=$PYCHARM_DIR/pycharm-community-2022.2.4/bin:$PATH
+
 # install niftyreg
 COPY niftyreg.sh .
 RUN bash niftyreg.sh
@@ -34,10 +40,8 @@ RUN bash mirtk.sh
 RUN rm mirtk.sh
 
 # install ptbpyrecon
-COPY PtbPyRecon/ ./PtbPyRecon
 COPY ptbrecon.sh .
-RUN bash ptbrecon.sh
-RUN rm ptbrecon.sh
+RUN chmod +x ./ptbrecon.sh
 
 
 # verify reconstruction on startup

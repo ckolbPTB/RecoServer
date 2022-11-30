@@ -13,7 +13,7 @@ export LANG=en_GB.UTF-8
 export LANGUAGE=en_GB:en
 
 # base utilities
-${APT_GET_INSTALL} build-essential wget swig libomp-dev screen snapd
+${APT_GET_INSTALL} build-essential wget swig libomp-dev screen locate
 
 # git
 ${APT_GET_INSTALL} git

@@ -11,5 +11,5 @@ cd MIRTK
 mkdir build
 cd build
 cmake ..
-make 
+make -j 20
 make install
