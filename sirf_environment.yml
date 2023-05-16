@@ -1,0 +1,44 @@
+name: RecoEnv
+channels:
+  - conda-forge
+  - intel
+  - ccpi
+  - defaults
+dependencies: 
+  - pip
+  - scikit-image
+  - mamba
+  - setuptools
+  - wheel
+  - pydicom
+  - pytest
+  - pytest-cov
+  - numpy        # CIL
+  - scipy=1.7.3  # CIL prevents `GLIBCXX_3.4.30' not found
+  - docopt
+  - matplotlib
+  - Cython       # CIL
+  - h5py         # CIL
+  - Pillow       # CIL
+  - wget         # CIL
+  - six          # CIL
+  - olefile      # CIL
+  - opencv       # CIL
+  - numba        # CIL
+  - pandas
+  - tifffile
+  - nibabel
+  - deprecation
+  - nose
+  - ipykernel
+  - ipp
+  - ipp-devel
+  - ipp-include
+  - tigre
+  - pip:
+    - ismrmrd
+    - git+https://github.com/data-exchange/dxchange.git  # CIL
+    - git+https://github.com/ismrmrd/ismrmrd-python-tools.git@master#egg=ismrmrd-python-tools
+
+  
+    

@@ -1,12 +1,13 @@
 ARG BASE_IMAGE=nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 FROM ${BASE_IMAGE} as base
 
-ENV http_proxy "http://webproxy.berlin.ptb.de:8080"
-ENV https_proxy "http://webproxy.berlin.ptb.de:8080"
+#ENV http_proxy "http://webproxy.berlin.ptb.de:8080"
+#ENV https_proxy "http://webproxy.berlin.ptb.de:8080"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 # set versions
+ARG SIRF_SB_TAG="v3.4.0"
 ARG ISMRMRD_TAG="v1.7.0"
 ARG SIEMENS_TO_ISMRMRD_TAG="v1.2.0"
 
@@ -43,4 +44,24 @@ COPY ptbrecon.sh .
 RUN bash ptbrecon.sh
 RUN rm ptbrecon.sh
 
+# install sirf dependencies
+COPY sirf_environment.yml .
+RUN /opt/conda/bin/activate PTBEnv
+RUN conda env update --file sirf_environment.yml
+
+# get specific version of SIRF 
+ENV INSTALL_DIR=/opt
+RUN git clone https://github.com/ckolbPTB/SIRF.git $INSTALL_DIR/SIRF
+
+# install gadgetron and sirf
+COPY sirf_gadgetron.sh .
+RUN bash sirf_gadgetron.sh
+RUN rm sirf_gadgetron.sh
+RUN chmod -R go+rwX /opt/SIRF-SuperBuild/INSTALL
+ENV PATH=/opt/SIRF-SuperBuild/INSTALL/bin:$PATH
+ENV LD_LIBRARY_PATH=/opt/SIRF-SuperBuild/INSTALL/lib:$LD_LIBRARY_PATH
+ENV PYTHONPATH=/opt/SIRF-SuperBuild/INSTALL/python:$PYTHONPATH
+
+# remove SIRF repo folder
+RUN rm -r $INSTALL_DIR/SIRF
 
