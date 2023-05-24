@@ -1,5 +1,5 @@
-ARG BASE_IMAGE=nvidia/cuda:11.3.0-cudnn8-devel-ubuntu20.04
-#ARG BASE_IMAGE=nvidia/cuda:12.0.0-cudnn8-devel-ubuntu22.04
+#ARG BASE_IMAGE=nvidia/cuda:11.3.0-cudnn8-devel-ubuntu20.04
+ARG BASE_IMAGE=nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
 FROM ${BASE_IMAGE} as base
 
 ENV http_proxy "http://webproxy.berlin.ptb.de:8080"
