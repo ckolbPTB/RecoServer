@@ -25,6 +25,6 @@ ln -s cmake-*x86_64 cmake || true
 export PATH="$PWD/cmake/bin:$PATH"
 
 # git
-${APT_GET_INSTALL} git
+${APT_GET_INSTALL} git tmux zsh vim htop unzip
 
 apt-get clean

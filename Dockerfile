@@ -1,5 +1,4 @@
-#ARG BASE_IMAGE=nvidia/cuda:11.3.0-cudnn8-devel-ubuntu20.04
-ARG BASE_IMAGE=nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04
+ARG BASE_IMAGE=nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
 FROM ${BASE_IMAGE} as base
 
 ENV http_proxy "http://webproxy.berlin.ptb.de:8080"
@@ -8,7 +7,7 @@ ENV https_proxy "http://webproxy.berlin.ptb.de:8080"
 ARG DEBIAN_FRONTEND=noninteractive
 
 # set versions
-ARG ISMRMRD_TAG="v1.7.0"
+ARG ISMRMRD_TAG="v1.13.6"
 ARG SIEMENS_TO_ISMRMRD_TAG="v1.2.0"
 
 # install ubuntu dependencies
@@ -24,7 +23,7 @@ ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
 # install anaconda
 ENV CONDA_DIR /opt/conda
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+RUN wget --quiet https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh -O ~/miniconda.sh && \
      /bin/bash ~/miniconda.sh -b -p /opt/conda
 ENV PATH=$CONDA_DIR/bin:$PATH
 
@@ -38,10 +37,10 @@ COPY mirtk.sh .
 RUN bash mirtk.sh
 RUN rm mirtk.sh
 
-# install ptbpyrecon dependencies
-COPY ptbrecon_environment.yml .
-COPY ptbrecon.sh .
-RUN bash ptbrecon.sh
-RUN rm ptbrecon.sh
+# install python dependencies
+COPY reco_environment.yml .
+COPY reco.sh .
+RUN bash reco.sh
+RUN rm reco.sh
 
 
