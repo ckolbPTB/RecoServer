@@ -38,7 +38,6 @@ RUN bash mirtk.sh
 RUN rm mirtk.sh
 
 # install python dependencies
-COPY reco_environment.yml .
 COPY reco.sh .
 RUN bash reco.sh
 RUN rm reco.sh
