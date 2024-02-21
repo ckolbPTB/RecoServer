@@ -21,7 +21,7 @@ RUN bash ismrmrd.sh
 RUN rm ismrmrd.sh
 ENV LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
-# install anaconda
+# install miniconda
 ENV CONDA_DIR /opt/conda
 RUN wget --quiet https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh -O ~/miniconda.sh && \
      /bin/bash ~/miniconda.sh -b -p /opt/conda

@@ -16,19 +16,16 @@ export LANGUAGE=en_GB:en
 ${APT_GET_INSTALL} --reinstall ca-certificates
 
 # base utilities
-${APT_GET_INSTALL} build-essential python3-dev wget swig libomp-dev screen locate pkg-config curl
+${APT_GET_INSTALL} build-essential python3-dev wget swig libomp-dev screen locate pkg-config curl git tmux zsh vim htop unzip
 
 # ensure nvidia signing keys are up to date
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.0-1_all.deb
 dpkg -i cuda-keyring_1.0-1_all.deb
 
-# CMake
+# cmake
 curl -o cmake.tgz -L https://github.com/Kitware/CMake/releases/download/v3.25.1/cmake-3.25.1-linux-x86_64.tar.gz
 tar xzf cmake.tgz && rm cmake.tgz
 ln -s cmake-*x86_64 cmake || true
 export PATH="$PWD/cmake/bin:$PATH"
-
-# git
-${APT_GET_INSTALL} git tmux zsh vim htop unzip
 
 apt-get clean

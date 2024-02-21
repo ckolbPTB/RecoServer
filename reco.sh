@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 set -ev
 
-conda update -n base -c defaults conda
-conda env create --file reco_environment.yml
+# Clone mrpro to get requirements
+git clone https://github.com/PTB-MR/mrpro --depth 1 /opt/mrpro
+
+# Create python 3.11 environment
+conda update -n base -c conda-forge conda
+conda init
+conda create -n RecoEnv311 python=3.11
 source /opt/conda/bin/activate RecoEnv311
-conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 pytorch-cuda=12.1 -c pytorch -c nvidia
-pip install torchkbnufft==1.4
+pip install -r /opt/mrpro/binder/requirements.txt
+
+# Remove mrpro repo
+rm -r /opt/mrpro
