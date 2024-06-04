@@ -23,7 +23,7 @@ wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/
 dpkg -i cuda-keyring_1.0-1_all.deb
 
 # cmake
-curl -o cmake.tgz -L https://github.com/Kitware/CMake/releases/download/v3.25.1/cmake-3.25.1-linux-x86_64.tar.gz
+curl -o cmake.tgz -L https://github.com/Kitware/CMake/releases/download/v3.25.1/cmake-3.29.0-linux-x86_64.tar.gz
 tar xzf cmake.tgz && rm cmake.tgz
 ln -s cmake-*x86_64 cmake || true
 export PATH="$PWD/cmake/bin:$PATH"

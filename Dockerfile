@@ -7,8 +7,8 @@ ENV https_proxy "http://webproxy.berlin.ptb.de:8080"
 ARG DEBIAN_FRONTEND=noninteractive
 
 # set versions
-ARG ISMRMRD_TAG="v1.13.6"
-ARG SIEMENS_TO_ISMRMRD_TAG="v1.2.0"
+ARG ISMRMRD_TAG="v1.13.7"
+ARG SIEMENS_TO_ISMRMRD_TAG="v1.2.11"
 
 # install ubuntu dependencies
 COPY ubuntu.sh .
@@ -27,6 +27,11 @@ RUN wget --quiet https://github.com/conda-forge/miniforge/releases/latest/downlo
      /bin/bash ~/miniconda.sh -b -p /opt/conda
 ENV PATH=$CONDA_DIR/bin:$PATH
 
+# install python dependencies
+COPY reco.sh .
+RUN bash reco.sh
+RUN rm reco.sh
+
 # install niftyreg
 COPY niftyreg.sh .
 RUN bash niftyreg.sh
@@ -37,9 +42,5 @@ COPY mirtk.sh .
 RUN bash mirtk.sh
 RUN rm mirtk.sh
 
-# install python dependencies
-COPY reco.sh .
-RUN bash reco.sh
-RUN rm reco.sh
 
 
