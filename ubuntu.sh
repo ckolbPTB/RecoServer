@@ -16,7 +16,7 @@ export LANGUAGE=en_GB:en
 ${APT_GET_INSTALL} --reinstall ca-certificates
 
 # base utilities
-${APT_GET_INSTALL} build-essential python3-dev wget swig libomp-dev screen locate pkg-config curl git tmux zsh vim htop unzip
+${APT_GET_INSTALL} build-essential python3-dev wget swig libomp-dev screen locate pkg-config curl git tmux zsh vim htop unzip file sshfs
 
 # ensure nvidia signing keys are up to date
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.0-1_all.deb
